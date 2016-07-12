@@ -16,6 +16,6 @@ namespace SpeedCurve
         [JsonProperty("urls")]
         public Url[] Urls { get; set; }
         [JsonProperty("median")]
-        public Median[] Median { get; set; }
+        public TestResult[] TestResults { get; set; }
     }
 }

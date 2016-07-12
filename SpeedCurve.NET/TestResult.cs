@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 
 namespace SpeedCurve
 {
-    public class Median
+    public class TestResult
     {
         [JsonProperty("timezone")]
         public string Timezone { get; set; }

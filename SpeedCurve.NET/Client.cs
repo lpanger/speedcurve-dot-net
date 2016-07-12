@@ -16,6 +16,7 @@ namespace SpeedCurve
 
         private const string SitesEndpoint = "/sites";
         private const string DeployEndpoint = "/deploy";
+        private const string TestsEndpoint = "/tests";
 
         private string _apiKey;
         private string _authHeader;
@@ -26,7 +27,7 @@ namespace SpeedCurve
             _authHeader = Convert.ToBase64String(Encoding.ASCII.GetBytes($"{_apiKey}:x"));
         }
 
-        public async Task<AllSitesResponse> GetAllSites(int days = 14) // 14 is speedcurve set default
+        public async Task<AllSitesResponse> GetAllSitesAsync(int days = 14) // 14 is speedcurve set default
         {
             var parameters = $"{ApiVersion}{SitesEndpoint}?days={days}";
 
@@ -41,7 +42,7 @@ namespace SpeedCurve
             }
         }
 
-        public async Task<CreateDeploymentResponse> CreateDeployment(int siteId, string note = null, string detail = null)
+        public async Task<CreateDeploymentResponse> CreateDeploymentAsync(int siteId, string note = null, string detail = null)
         {
             var parameters = $"{ApiVersion}{DeployEndpoint}";
 
@@ -78,6 +79,35 @@ namespace SpeedCurve
             }
         }
 
-        
+        public async Task<GetDeploymentResponse> GetDeploymentAsync(int deploymentId)
+        {
+            var parameters = $"{ApiVersion}{DeployEndpoint}/{deploymentId}";
+
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(BaseUrl);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", _authHeader);
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                var result = await client.GetAsync(parameters);
+
+                return JsonConvert.DeserializeObject<GetDeploymentResponse>(await result.Content.ReadAsStringAsync());
+            }
+        }
+
+        public async Task<TestResult> GetTestResultsAsync(string testId)
+        {
+            var parameters = $"{ApiVersion}{TestsEndpoint}/{testId}";
+
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(BaseUrl);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", _authHeader);
+
+                var result = await client.GetAsync(parameters);
+
+                return JsonConvert.DeserializeObject<TestResult>(await result.Content.ReadAsStringAsync());
+            }
+        }
     }
 }
