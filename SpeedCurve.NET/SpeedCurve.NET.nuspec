@@ -1,0 +1,17 @@
+﻿<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>SpeedCurve.NET</id>
+    <version>0.0.1</version>
+    <title>SpeedCurve.NET</title>
+    <authors>Lucas Pang</authors>
+    <owners>Lucas Pang</owners>
+    <licenseUrl>https://github.com/lpanger/speedcurve-dot-net/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/lpanger/speedcurve-dot-net</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Library to use SpeedCurve API</description>
+    <releaseNotes></releaseNotes>
+    <copyright>Copyright 2016</copyright>
+    <tags>SpeedCurve</tags>
+  </metadata>
+</package>
