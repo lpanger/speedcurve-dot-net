@@ -109,5 +109,20 @@ namespace SpeedCurve
                 return JsonConvert.DeserializeObject<TestResult>(await result.Content.ReadAsStringAsync());
             }
         }
+
+        public async Task<string> GetTestResultsRawAsync(string testId)
+        {
+            var parameters = $"{ApiVersion}{TestsEndpoint}/{testId}";
+
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(BaseUrl);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", _authHeader);
+
+                var result = await client.GetAsync(parameters);
+
+                return await result.Content.ReadAsStringAsync();
+            }
+        }
     }
 }
