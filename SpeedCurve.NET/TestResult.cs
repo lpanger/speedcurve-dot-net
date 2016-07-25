@@ -9,6 +9,8 @@ namespace SpeedCurve
 {
     public class TestResult
     {
+        [JsonProperty("url")]
+        public string Url { get; set; }
         [JsonProperty("timezone")]
         public string Timezone { get; set; }
         [JsonProperty("day")]
